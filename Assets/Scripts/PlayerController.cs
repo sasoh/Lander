@@ -46,12 +46,14 @@ public class PlayerController : MonoBehaviour
 	void UpdateMovement()
 	{
 
+		// apply movement force
 		Vector2 movementDirection = new Vector2(moveHorizontal, moveVertical);
 		Rigidbody2D rBody = this.GetComponent<Rigidbody2D>();
 		rBody.AddForce(movementDirection * speed);
 
+		// limit horizontal/vertical velocity
 		Vector2 velocity = rBody.velocity;
-		velocity.x = Mathf.Clamp(velocity.x, -100.0f, maximumSpeedHorizontal);
+		velocity.x = Mathf.Clamp(velocity.x, -maximumSpeedHorizontal, maximumSpeedHorizontal);
 		velocity.y = Mathf.Clamp(velocity.y, -100.0f, maximumSpeedVertical);
 		rBody.velocity = velocity;
 
