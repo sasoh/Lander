@@ -10,7 +10,7 @@ public class GeneralControlsController : MonoBehaviour
 
 		if (Input.GetKey("escape"))
 		{
-			Application.Quit();
+			Application.LoadLevel("MainMenuScene");
 		}
 
 	}

@@ -4,20 +4,18 @@ using System.Collections;
 public class PlayerController : MonoBehaviour
 {
 
-	//public
-	[Range(0.0f, 10.0f)]
-	public float speedRotation = 1.0f;
+	// public
+	[Range(0.0f, 20.0f)]
+	public float speedHorizontal = 1.0f;
 
-	[Range(0.0f, 10.0f)]
+	[Range(0.0f, 20.0f)]
 	public float speedThrust = 1.0f;
 
 	[Range(0.0f, 10.0f)]
-	public float maximumSpeedVertical = 4.0f;
+	public float maximumThrust = 4.0f;
 
-	[Range(0.0f, 1.0f)]
-	public float maximumSpeedRotation = 1.0f;
-
-	public bool isOnComplexGravityLevel = true;
+	[Range(0.0f, 10.0f)]
+	public float maximumHorizontal = 4.0f;
 
 	// private
 	private float moveHorizontal = 0.0f;
@@ -50,13 +48,13 @@ public class PlayerController : MonoBehaviour
 		{
 			thrust = 1.0f;
 
-			SetThrustParticleSystemStatus(true);
+			SetThrustVisualsVisible(true);
 		}
 		else
 		{
 			thrust = 0.0f;
 
-			SetThrustParticleSystemStatus(false);
+			SetThrustVisualsVisible(false);
 		}
 
 		moveHorizontal = Input.GetAxis("Horizontal");
@@ -69,39 +67,26 @@ public class PlayerController : MonoBehaviour
 		Rigidbody2D rigid2d = this.GetComponent<Rigidbody2D>();
 
 		// apply thrust
-		float thrustFactor = thrust * speedThrust;
-		Vector3 thrustForce = transform.up;
-		thrustForce *= thrustFactor;
+		Vector2 thrustForce = new Vector2(0.0f, thrust * speedThrust);
 		rigid2d.AddForce(thrustForce);
 
-		// apply rotation
-		if (isOnComplexGravityLevel == true)
-		{
+		// move in given direction
+		Vector2 horizontalForce = new Vector2(moveHorizontal * speedHorizontal, 0.0f);
+		rigid2d.AddForce(horizontalForce);
 
-			if (isOnComplexGravityLevel == true && 1.0f - Mathf.Abs(moveHorizontal) < 0.001f)
-			{
-
-				// rotate in given direction
-				float torqueForce = moveHorizontal * speedRotation;
-				torqueForce = Mathf.Clamp(torqueForce, -maximumSpeedRotation, maximumSpeedRotation);
-				rigid2d.AddTorque(-torqueForce);
-			}
-		}
-		else
-		{
-			// move in given direction
-			Vector2 rotationForce = new Vector2(moveHorizontal * speedRotation, 0.0f);
-			rotationForce.x = Mathf.Clamp(rotationForce.x, -maximumSpeedVertical, maximumSpeedVertical);
-			rigid2d.AddForce(rotationForce);
-		}
+		// velocity restriction
+		Vector2 velocity = rigid2d.velocity;
+		velocity.x = Mathf.Clamp(velocity.x, -maximumHorizontal, maximumHorizontal);
+		velocity.y = Mathf.Clamp(velocity.y, -100.0f, maximumThrust);
+		rigid2d.velocity = velocity;
 
 	}
 
-	void SetThrustParticleSystemStatus(bool status)
+
+	void SetThrustVisualsVisible(bool status)
 	{
-		
-		PlayerParticleSystemHelperScript particleController = GetComponent<PlayerParticleSystemHelperScript>();
-		particleController.SetParticleTrailStatus(status);
+
+		print("Thrust visuals visible: " + status);
 
 	}
 

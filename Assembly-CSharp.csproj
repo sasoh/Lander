@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{FF29D2CC-DFFE-E8E3-D83D-8B0812FCE9FB}</ProjectGuid>
+	<ProjectGuid>{5B9FF267-005F-A3BF-219E-FEAE2D8C894F}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -49,6 +49,12 @@
      <Compile Include="Assets\Scripts\GeneralControlsController.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Scripts\PlayerParticleSystemHelperScript.cs" />
+     <Compile Include="Assets\Scripts\Scene scripts\CharacterCreationSceneButtonsScript.cs" />
+     <Compile Include="Assets\Scripts\Scene scripts\CreditsSceneScript.cs" />
+     <Compile Include="Assets\Scripts\Scene scripts\MainMenuSceneButtonsScript.cs" />
+     <Compile Include="Assets\Scripts\Scene scripts\MissionBriefingSceneButtonScript.cs" />
+     <Compile Include="Assets\Scripts\Scene scripts\OptionsSceneScript.cs" />
+     <Compile Include="Assets\Scripts\Scene scripts\SplashSceneMenuScript.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
