@@ -25,6 +25,7 @@ Alpha
 - [ ] additional graphcis for player creation, levels
 - [ ] several levels
 - [ ] graivty modifiers - forces, effectors, etc
+- [ ] saving game (player, level reached, etc)
 - TBC
 
 Beta
