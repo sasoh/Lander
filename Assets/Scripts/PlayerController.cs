@@ -21,8 +21,12 @@ public class PlayerController : MonoBehaviour
 	private float moveHorizontal = 0.0f;
 	private float thrust = 0.0f;
 
+	private GameObject cargoObject;
+
 	void Start()
 	{
+
+		cargoObject = null;
 
 	}
 
@@ -44,17 +48,10 @@ public class PlayerController : MonoBehaviour
 	{
 
 		// thrust controlled with fire 1
+		thrust = 0.0f;
 		if (Input.GetButton("Fire1") == true)
 		{
 			thrust = 1.0f;
-
-			SetThrustVisualsVisible(true);
-		}
-		else
-		{
-			thrust = 0.0f;
-
-			SetThrustVisualsVisible(false);
 		}
 
 		moveHorizontal = Input.GetAxis("Horizontal");
@@ -83,11 +80,56 @@ public class PlayerController : MonoBehaviour
 	}
 
 
-	void SetThrustVisualsVisible(bool status)
+	void OnTriggerEnter2D(Collider2D otherObj)
 	{
 
-		print("Thrust visuals visible: " + status);
+		if (cargoObject == null)
+		{
+		
+			if (otherObj.gameObject.tag == "Cargo")
+			{
+		
+				PickupCargo(otherObj.gameObject);
+		
+			}
+		
+		}
 
 	}
 
+	void OnTriggerExit2D(Collider2D otherObj)
+	{
+
+	}
+
+	void PickupCargo(GameObject cargo)
+	{
+
+		if (cargo != null)
+		{
+
+			cargoObject = cargo;
+
+			Rigidbody2D cargoRigid2d = cargoObject.GetComponent<Rigidbody2D>();
+			cargoRigid2d.isKinematic = true;
+
+		}
+
+	}
+
+	void DropCargo()
+	{
+
+		// remove kinematic flag
+		if (cargoObject != null)
+		{
+
+			Rigidbody2D cargoRigid2d = cargoObject.GetComponent<Rigidbody2D>();
+			cargoRigid2d.isKinematic = false;
+
+		}
+
+		cargoObject = null;
+
+	}
 }
