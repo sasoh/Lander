@@ -4,6 +4,20 @@ using System.Collections;
 public class GeneralControlsController : MonoBehaviour
 {
 
+	void Start()
+	{
+
+		Cursor.visible = false;
+
+	}
+
+	void OnDestroy()
+	{
+
+		Cursor.visible = true;
+
+	}
+
 	// Update is called once per frame
 	void Update()
 	{
