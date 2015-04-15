@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
 	[Range(0.0f, 10.0f)]
 	public float maximumHorizontal = 4.0f;
 
+	public GameObject carryingPivot = null;
+
 	// private
 	private float moveHorizontal = 0.0f;
 	private float thrust = 0.0f;
@@ -35,6 +37,8 @@ public class PlayerController : MonoBehaviour
 
 		ProcessInput();
 
+		UpdateCargo();
+
 	}
 
 	void FixedUpdate()
@@ -52,6 +56,12 @@ public class PlayerController : MonoBehaviour
 		if (Input.GetButton("Fire1") == true || Input.GetKey(KeyCode.UpArrow) == true)
 		{
 			thrust = 1.0f;
+		}
+
+		// temporary allow player to drop cargo with space
+		if (Input.GetKey(KeyCode.Space) == true)
+		{
+			DropCargo();
 		}
 
 		moveHorizontal = Input.GetAxis("Horizontal");
@@ -79,20 +89,29 @@ public class PlayerController : MonoBehaviour
 
 	}
 
+	void UpdateCargo()
+	{
+
+		if (cargoObject != null)
+		{
+			cargoObject.transform.position = carryingPivot.transform.position;
+		}
+
+	}
 
 	void OnTriggerEnter2D(Collider2D otherObj)
 	{
 
 		if (cargoObject == null)
 		{
-		
+
 			if (otherObj.gameObject.tag == "Cargo")
 			{
-		
+
 				PickupCargo(otherObj.gameObject);
-		
+
 			}
-		
+
 		}
 
 	}
@@ -101,7 +120,7 @@ public class PlayerController : MonoBehaviour
 	{
 
 	}
-
+	
 	void PickupCargo(GameObject cargo)
 	{
 
@@ -112,7 +131,9 @@ public class PlayerController : MonoBehaviour
 
 			Rigidbody2D cargoRigid2d = cargoObject.GetComponent<Rigidbody2D>();
 			cargoRigid2d.isKinematic = true;
-
+			
+			// ignore collisions with cargo bottom
+			Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), cargoObject.GetComponent<EdgeCollider2D>());
 		}
 
 	}
@@ -126,6 +147,7 @@ public class PlayerController : MonoBehaviour
 
 			Rigidbody2D cargoRigid2d = cargoObject.GetComponent<Rigidbody2D>();
 			cargoRigid2d.isKinematic = false;
+			cargoRigid2d.velocity = GetComponent<Rigidbody2D>().velocity;
 
 		}
 
