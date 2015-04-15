@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
 
 		// thrust controlled with fire 1
 		thrust = 0.0f;
-		if (Input.GetButton("Fire1") == true)
+		if (Input.GetButton("Fire1") == true || Input.GetKey(KeyCode.UpArrow) == true)
 		{
 			thrust = 1.0f;
 		}
