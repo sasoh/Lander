@@ -102,43 +102,34 @@ public class PlayerController : MonoBehaviour
 	void OnTriggerEnter2D(Collider2D otherObj)
 	{
 
-		if (cargoObject == null)
+		if (otherObj.gameObject.tag == "Cargo")
 		{
-
-			if (otherObj.gameObject.tag == "Cargo")
-			{
-
-				PickupCargo(otherObj.gameObject);
-
-			}
+		
+			// pickup cargo straight away
+			PickupCargo(otherObj.gameObject);
 
 		}
 
 	}
 
-	void OnTriggerExit2D(Collider2D otherObj)
-	{
-
-	}
-	
 	void PickupCargo(GameObject cargo)
 	{
 
-		if (cargo != null)
+		if (cargo != null && cargoObject == null)
 		{
 
 			cargoObject = cargo;
 
 			Rigidbody2D cargoRigid2d = cargoObject.GetComponent<Rigidbody2D>();
 			cargoRigid2d.isKinematic = true;
-			
+
 			// ignore collisions with cargo bottom
 			Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), cargoObject.GetComponent<EdgeCollider2D>());
 		}
 
 	}
 
-	void DropCargo()
+	public void DropCargo()
 	{
 
 		// remove kinematic flag
