@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
 
 	public GameObject carryingPivot = null;
 
+	public PlayerTutorialControllerScript tutorialController;
+
 	// private
 	private float moveHorizontal = 0.0f;
 	private float thrust = 0.0f;
@@ -58,13 +60,22 @@ public class PlayerController : MonoBehaviour
 			thrust = 1.0f;
 		}
 
-		// temporary allow player to drop cargo with space
-		if (Input.GetKey(KeyCode.Space) == true)
-		{
-			DropCargo();
-		}
-
 		moveHorizontal = Input.GetAxis("Horizontal");
+
+		if (tutorialController != null)
+		{
+			if (Input.anyKeyDown == true)
+			{
+				if (tutorialController.lastStep == TutorialHandlerScript.TutorialStep.StepPlayerControls)
+				{
+					tutorialController.HideSteps();
+
+					GameObject tutorialObject = GameObject.Find("Tutorial Handler");
+					TutorialHandlerScript tutorialHandler = tutorialObject.GetComponent<TutorialHandlerScript>();
+					tutorialHandler.ShowStep(TutorialHandlerScript.TutorialStep.StepCargoIntroduction);
+				}
+			}
+		}
 
 	}
 
@@ -104,7 +115,7 @@ public class PlayerController : MonoBehaviour
 
 		if (otherObj.gameObject.tag == "Cargo")
 		{
-		
+
 			// pickup cargo straight away
 			PickupCargo(otherObj.gameObject);
 
@@ -125,6 +136,14 @@ public class PlayerController : MonoBehaviour
 
 			// ignore collisions with cargo bottom
 			Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), cargoObject.GetComponent<EdgeCollider2D>());
+
+			if (tutorialController != null)
+			{
+				// move to next step
+				GameObject tutorialObject = GameObject.Find("Tutorial Handler");
+				TutorialHandlerScript tutorialHandler = tutorialObject.GetComponent<TutorialHandlerScript>();
+				tutorialHandler.ShowStep(TutorialHandlerScript.TutorialStep.StepCargoPicked);
+			}
 		}
 
 	}
@@ -144,5 +163,12 @@ public class PlayerController : MonoBehaviour
 
 		cargoObject = null;
 
+		if (tutorialController != null)
+		{
+			// move to next step
+			GameObject tutorialObject = GameObject.Find("Tutorial Handler");
+			TutorialHandlerScript tutorialHandler = tutorialObject.GetComponent<TutorialHandlerScript>();
+			tutorialHandler.ShowStep(TutorialHandlerScript.TutorialStep.StepCargoDelivered);
+		}
 	}
 }

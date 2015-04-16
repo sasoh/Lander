@@ -46,18 +46,21 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\CargoTutorialControllerScript.cs" />
      <Compile Include="Assets\Scripts\Game scene scripts\CargoDeliveryControllerScript.cs" />
      <Compile Include="Assets\Scripts\Game scene scripts\CargoFlagControllerScript.cs" />
      <Compile Include="Assets\Scripts\Game scene scripts\PlatformSimpleScript.cs" />
      <Compile Include="Assets\Scripts\GeneralControlsController.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Scripts\PlayerParticleSystemHelperScript.cs" />
+     <Compile Include="Assets\Scripts\PlayerTutorialControllerScript.cs" />
      <Compile Include="Assets\Scripts\Scene scripts\CharacterCreationSceneButtonsScript.cs" />
      <Compile Include="Assets\Scripts\Scene scripts\CreditsSceneScript.cs" />
      <Compile Include="Assets\Scripts\Scene scripts\MainMenuSceneButtonsScript.cs" />
      <Compile Include="Assets\Scripts\Scene scripts\MissionBriefingSceneButtonScript.cs" />
      <Compile Include="Assets\Scripts\Scene scripts\OptionsSceneScript.cs" />
      <Compile Include="Assets\Scripts\Scene scripts\SplashSceneMenuScript.cs" />
+     <Compile Include="Assets\Scripts\TutorialHandlerScript.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
