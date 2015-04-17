@@ -55,9 +55,12 @@ public class PlayerTutorialControllerScript : MonoBehaviour
 	public void HideSteps()
 	{
 
-		foreach(GameObject obj in allObjects)
+		if (allObjects != null)
 		{
-			obj.SetActive(false);
+			foreach (GameObject obj in allObjects)
+			{
+				obj.SetActive(false);
+			}
 		}
 
 	}

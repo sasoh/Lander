@@ -4,26 +4,27 @@ using System.Collections;
 public class PlayerController : MonoBehaviour
 {
 
-	// public
-	[Range(0.0f, 20.0f)]
+	[Range(0.0f, 50.0f)]
 	public float speedHorizontal = 1.0f;
 
-	[Range(0.0f, 20.0f)]
-	public float speedThrust = 1.0f;
+	[Range(0.0f, 50.0f)]
+	public float speedVertical = 1.0f;
 
-	[Range(0.0f, 10.0f)]
-	public float maximumThrust = 4.0f;
+	[Range(0.0f, 150.0f)]
+	public float maximumVertical = 4.0f;
 
-	[Range(0.0f, 10.0f)]
+	[Range(0.0f, 150.0f)]
 	public float maximumHorizontal = 4.0f;
+
+	[Range(0.0f, 25.0f)]
+	public float maximumSafeVelocity = 4.0f;
 
 	public GameObject carryingPivot = null;
 
 	public PlayerTutorialControllerScript tutorialController;
 
-	// private
 	private float moveHorizontal = 0.0f;
-	private float thrust = 0.0f;
+	private float moveVertical = 0.0f;
 
 	private GameObject cargoObject;
 
@@ -53,14 +54,9 @@ public class PlayerController : MonoBehaviour
 	void ProcessInput()
 	{
 
-		// thrust controlled with fire 1
-		thrust = 0.0f;
-		if (Input.GetButton("Fire1") == true || Input.GetKey(KeyCode.UpArrow) == true)
-		{
-			thrust = 1.0f;
-		}
-
+		
 		moveHorizontal = Input.GetAxis("Horizontal");
+		moveVertical = Input.GetAxis("Vertical");
 
 		if (tutorialController != null)
 		{
@@ -84,20 +80,15 @@ public class PlayerController : MonoBehaviour
 
 		Rigidbody2D rigid2d = this.GetComponent<Rigidbody2D>();
 
-		// apply thrust
-		Vector2 thrustForce = new Vector2(0.0f, thrust * speedThrust);
-		rigid2d.AddForce(thrustForce);
+		// vertical
+		Vector2 verticalForce = new Vector2(0.0f, moveVertical * speedVertical);
+		verticalForce.y = Mathf.Clamp(verticalForce.y, -maximumVertical, maximumVertical);
+		rigid2d.AddForce(verticalForce);
 
-		// move in given direction
+		// horizontal
 		Vector2 horizontalForce = new Vector2(moveHorizontal * speedHorizontal, 0.0f);
+		horizontalForce.x = Mathf.Clamp(horizontalForce.x, -maximumHorizontal, maximumHorizontal);
 		rigid2d.AddForce(horizontalForce);
-
-		// velocity restriction
-		Vector2 velocity = rigid2d.velocity;
-		velocity.x = Mathf.Clamp(velocity.x, -maximumHorizontal, maximumHorizontal);
-		velocity.y = Mathf.Clamp(velocity.y, -100.0f, maximumThrust);
-		rigid2d.velocity = velocity;
-
 	}
 
 	void UpdateCargo()
@@ -119,6 +110,22 @@ public class PlayerController : MonoBehaviour
 			// pickup cargo straight away
 			PickupCargo(otherObj.gameObject);
 
+		}
+
+	}
+
+	void OnCollisionEnter2D(Collision2D collision)
+	{
+
+		if (collision.gameObject.tag == "Platform")
+		{
+			Rigidbody2D rigid2d = this.GetComponent<Rigidbody2D>();
+
+			if (Mathf.Abs(rigid2d.velocity.x) > maximumSafeVelocity || Mathf.Abs(rigid2d.velocity.y) > maximumSafeVelocity)
+			{
+				MultipleParticleSystemController particleController = GetComponentInChildren<MultipleParticleSystemController>();
+				particleController.BeginEmitting();
+			}
 		}
 
 	}

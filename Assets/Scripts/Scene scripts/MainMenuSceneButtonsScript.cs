@@ -27,7 +27,7 @@ public class MainMenuSceneButtonsScript : MonoBehaviour
 	public void DidPressPlayButton()
 	{
 
-		LoadSceneNamed("CharacterCreationScene");
+		LoadSceneNamed("MissionScene");
 
 	}
 
