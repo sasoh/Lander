@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class PlayerController : MonoBehaviour
 	public float maximumSafeVelocity = 4.0f;
 
 	public GameObject carryingPivot = null;
+
+	public ScreenOverlayScript overlayScript = null; 
 
 	public PlayerTutorialControllerScript tutorialController;
 
@@ -123,9 +126,21 @@ public class PlayerController : MonoBehaviour
 
 			if (Mathf.Abs(rigid2d.velocity.x) > maximumSafeVelocity || Mathf.Abs(rigid2d.velocity.y) > maximumSafeVelocity)
 			{
-				MultipleParticleSystemController particleController = GetComponentInChildren<MultipleParticleSystemController>();
-				particleController.BeginEmitting();
+				DidHitGroundFast();
 			}
+		}
+
+	}
+
+	void DidHitGroundFast()
+	{
+
+		MultipleParticleSystemController particleController = GetComponentInChildren<MultipleParticleSystemController>();
+		particleController.BeginEmitting();
+	
+		if (overlayScript != null)
+		{
+			overlayScript.ShowRedOverlay();
 		}
 
 	}
