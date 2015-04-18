@@ -143,6 +143,12 @@ public class PlayerController : MonoBehaviour
 			overlayScript.ShowRedOverlay();
 		}
 
+		CameraShakeScript shakeScript = Camera.main.GetComponent<CameraShakeScript>();
+		if (shakeScript != null)
+		{
+			shakeScript.shake = 0.5f;
+		}	
+
 	}
 
 	void PickupCargo(GameObject cargo)
