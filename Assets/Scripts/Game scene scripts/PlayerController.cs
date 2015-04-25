@@ -20,9 +20,17 @@ public class PlayerController : MonoBehaviour
 	[Range(0.0f, 25.0f)]
 	public float maximumSafeVelocity = 4.0f;
 
+	[Range(0.0f, 45.0f)]
+	public float maximumTiltAngle = 45.0f;
+
+	[Range(0.0f, 10.0f)]
+	public float speedTilt = 3.0f;
+
+	public GameObject visuals = null;
+
 	public GameObject carryingPivot = null;
 
-	public ScreenOverlayScript overlayScript = null; 
+	public ScreenOverlayScript overlayScript = null;
 
 	public PlayerTutorialControllerScript tutorialController;
 
@@ -57,7 +65,7 @@ public class PlayerController : MonoBehaviour
 	void ProcessInput()
 	{
 
-		
+
 		moveHorizontal = Input.GetAxis("Horizontal");
 		moveVertical = Input.GetAxis("Vertical");
 
@@ -92,6 +100,15 @@ public class PlayerController : MonoBehaviour
 		Vector2 horizontalForce = new Vector2(moveHorizontal * speedHorizontal, 0.0f);
 		horizontalForce.x = Mathf.Clamp(horizontalForce.x, -maximumHorizontal, maximumHorizontal);
 		rigid2d.AddForce(horizontalForce);
+
+		// add tilting to visuals
+		if (visuals != null)
+		{
+			float tiltAroundZ = (-moveHorizontal) * maximumTiltAngle;
+			Quaternion target = Quaternion.Euler(0.0f, 0.0f, tiltAroundZ);
+			visuals.transform.rotation = Quaternion.Slerp(visuals.transform.rotation, target, Time.deltaTime * speedTilt);
+		}
+
 	}
 
 	void UpdateCargo()
@@ -137,7 +154,7 @@ public class PlayerController : MonoBehaviour
 
 		MultipleParticleSystemController particleController = GetComponentInChildren<MultipleParticleSystemController>();
 		particleController.BeginEmitting();
-	
+
 		if (overlayScript != null)
 		{
 			overlayScript.ShowRedOverlay();
@@ -147,7 +164,7 @@ public class PlayerController : MonoBehaviour
 		if (shakeScript != null)
 		{
 			shakeScript.shake = 0.5f;
-		}	
+		}
 
 	}
 
