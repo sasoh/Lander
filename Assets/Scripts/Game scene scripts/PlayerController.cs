@@ -154,8 +154,9 @@ public class PlayerController : MonoBehaviour
 
 		if (collision.gameObject.tag == "Platform")
 		{
-			Rigidbody2D rigid2d = this.GetComponent<Rigidbody2D>();
+			Rigidbody2D rigid2d = GetComponent<Rigidbody2D>();
 
+			print("rigid2d velocity = " + rigid2d.velocity);
 			if (Mathf.Abs(rigid2d.velocity.x) > maximumSafeVelocity || Mathf.Abs(rigid2d.velocity.y) > maximumSafeVelocity)
 			{
 				DidHitGroundFast();
