@@ -12,19 +12,19 @@ Roadmap
 
 
 Prealpha
-- [ ] base menu flow
+- [x] base menu flow
 - main screen
 - character creation
 - mission select
-- [ ] ugh-style lander control
-- [ ] 1-2 playable levels with difficulty difference
-- [ ] earth-like gravity
-- [ ] tips
+- [x] ugh-style lander control
+- [x] 1-2 playable levels with difficulty difference
+- [x] earth-like gravity
+- [x] tips
 
 Alpha
 - [ ] additional graphcis for player creation, levels
 - [ ] several levels
-- [ ] graivty modifiers - forces, effectors, etc
+- [ ] gravity modifiers - forces, effectors, etc
 - [ ] saving game (player, level reached, etc)
 - TBC
 
