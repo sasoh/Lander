@@ -26,6 +26,9 @@ public class PlayerController : MonoBehaviour
 	[Range(0.0f, 10.0f)]
 	public float speedTilt = 3.0f;
 
+	[Range(0, 10)]
+	public int hitPoints = 5;
+
 	public GameObject visuals = null;
 
 	public GameObject carryingPivot = null;
@@ -34,15 +37,18 @@ public class PlayerController : MonoBehaviour
 
 	public PlayerTutorialControllerScript tutorialController;
 
+	public GameObject explosionPrefab;
+
 	private float moveHorizontal = 0.0f;
 	private float moveVertical = 0.0f;
-
+	private int currentHitPoints = 0;
 	private GameObject cargoObject;
 
 	void Start()
 	{
 
 		cargoObject = null;
+		currentHitPoints = hitPoints;
 
 	}
 
@@ -65,21 +71,23 @@ public class PlayerController : MonoBehaviour
 	void ProcessInput()
 	{
 
-
-		moveHorizontal = Input.GetAxis("Horizontal");
-		moveVertical = Input.GetAxis("Vertical");
-
-		if (tutorialController != null)
+		if (currentHitPoints > 0)
 		{
-			if (Input.anyKeyDown == true)
-			{
-				if (tutorialController.lastStep == TutorialHandlerScript.TutorialStep.StepPlayerControls)
-				{
-					tutorialController.HideSteps();
+			moveHorizontal = Input.GetAxis("Horizontal");
+			moveVertical = Input.GetAxis("Vertical");
 
-					GameObject tutorialObject = GameObject.Find("Tutorial Handler");
-					TutorialHandlerScript tutorialHandler = tutorialObject.GetComponent<TutorialHandlerScript>();
-					tutorialHandler.ShowStep(TutorialHandlerScript.TutorialStep.StepCargoIntroduction);
+			if (tutorialController != null)
+			{
+				if (Input.anyKeyDown == true)
+				{
+					if (tutorialController.lastStep == TutorialHandlerScript.TutorialStep.StepPlayerControls)
+					{
+						tutorialController.HideSteps();
+
+						GameObject tutorialObject = GameObject.Find("Tutorial Handler");
+						TutorialHandlerScript tutorialHandler = tutorialObject.GetComponent<TutorialHandlerScript>();
+						tutorialHandler.ShowStep(TutorialHandlerScript.TutorialStep.StepCargoIntroduction);
+					}
 				}
 			}
 		}
@@ -164,6 +172,19 @@ public class PlayerController : MonoBehaviour
 		if (shakeScript != null)
 		{
 			shakeScript.shake = 0.5f;
+		}
+
+		--currentHitPoints;
+		if (currentHitPoints <= 0)
+		{
+			// scale down player
+			visuals.transform.localScale = new Vector3(0.0f, 0.0f, 0.0f);
+
+			// explosion!
+			if (explosionPrefab != null)
+			{
+				Instantiate(explosionPrefab, transform.position, transform.rotation);
+			}
 		}
 
 	}
