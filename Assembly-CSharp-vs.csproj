@@ -54,6 +54,7 @@
      <Compile Include="Assets\Scripts\Game scene scripts\PlatformSimpleScript.cs" />
      <Compile Include="Assets\Scripts\Game scene scripts\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Game scene scripts\PlayerParticleSystemHelperScript.cs" />
+     <Compile Include="Assets\Scripts\Game scene scripts\PlayerThrustVisualsScript.cs" />
      <Compile Include="Assets\Scripts\Game scene scripts\PlayerTutorialControllerScript.cs" />
      <Compile Include="Assets\Scripts\Game scene scripts\ScreenOverlayScript.cs" />
      <Compile Include="Assets\Scripts\Game scene scripts\TutorialHandlerScript.cs" />
