@@ -184,14 +184,14 @@ public class PlayerController : MonoBehaviour
 		--currentHitPoints;
 		if (currentHitPoints <= 0)
 		{
-			// scale down player
-			visuals.transform.localScale = new Vector3(0.0f, 0.0f, 0.0f);
-
 			// explosion!
 			if (explosionPrefab != null)
 			{
 				Instantiate(explosionPrefab, transform.position, transform.rotation);
 			}
+
+			// kill self
+			gameObject.SetActive(false);
 		}
 
 	}

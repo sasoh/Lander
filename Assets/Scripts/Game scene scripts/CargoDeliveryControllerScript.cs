@@ -25,20 +25,23 @@ public class CargoDeliveryControllerScript : MonoBehaviour
 			PlatformSimpleScript platformScript = otherObj.gameObject.GetComponentInParent<PlatformSimpleScript>();
 			CargoFlagControllerScript flagScript = GetComponent<CargoFlagControllerScript>();
 
-			if (platformScript.type == flagScript.type)
+			if (platformScript != null)
 			{
-				// rough release from the player object
-				GameObject playerObject = GameObject.Find("Player");
-				if (playerObject != null)
+				if (platformScript.type == flagScript.type)
 				{
-					PlayerController playerController = playerObject.GetComponent<PlayerController>();
-					playerController.DropCargo();
+					// rough release from the player object
+					GameObject playerObject = GameObject.Find("Player");
+					if (playerObject != null)
+					{
+						PlayerController playerController = playerObject.GetComponent<PlayerController>();
+						playerController.DropCargo();
 
-					Destroy(gameObject);
+						Destroy(gameObject);
+					}
 				}
 			}
 		}
 
 	}
-	
+
 }
