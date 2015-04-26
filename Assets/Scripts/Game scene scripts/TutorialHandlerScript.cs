@@ -16,7 +16,7 @@ public class TutorialHandlerScript : MonoBehaviour
 
 	private GameObject playerObject;
 	private GameObject cargoObject;
-	
+
 	// Use this for initialization
 	void Start()
 	{
@@ -37,30 +37,33 @@ public class TutorialHandlerScript : MonoBehaviour
 	public void ShowStep(TutorialStep step)
 	{
 
-		lastStep = step;
+		if (playerObject != null && cargoObject != null)
+		{
+			lastStep = step;
 
-		PlayerTutorialControllerScript playerScript = playerObject.GetComponent<PlayerTutorialControllerScript>();
-		CargoTutorialControllerScript cargoScript = cargoObject.GetComponent<CargoTutorialControllerScript>();
-		
-		if (step == TutorialStep.StepPlayerControls)
-		{
-			cargoScript.HideSteps();
-			playerScript.ShowStep(step);
-		}
-		else if (step == TutorialStep.StepCargoIntroduction)
-		{
-			playerScript.HideSteps();
-			cargoScript.ShowStep(step);
-		}
-		else if (step == TutorialStep.StepCargoPicked)
-		{
-			cargoScript.HideSteps();
-			playerScript.ShowStep(step);
-		}
-		else if (step == TutorialStep.StepCargoDelivered)
-		{
-			cargoScript.HideSteps();
-			playerScript.ShowStep(step);
+			PlayerTutorialControllerScript playerScript = playerObject.GetComponent<PlayerTutorialControllerScript>();
+			CargoTutorialControllerScript cargoScript = cargoObject.GetComponent<CargoTutorialControllerScript>();
+
+			if (step == TutorialStep.StepPlayerControls)
+			{
+				cargoScript.HideSteps();
+				playerScript.ShowStep(step);
+			}
+			else if (step == TutorialStep.StepCargoIntroduction)
+			{
+				playerScript.HideSteps();
+				cargoScript.ShowStep(step);
+			}
+			else if (step == TutorialStep.StepCargoPicked)
+			{
+				cargoScript.HideSteps();
+				playerScript.ShowStep(step);
+			}
+			else if (step == TutorialStep.StepCargoDelivered)
+			{
+				cargoScript.HideSteps();
+				playerScript.ShowStep(step);
+			}
 		}
 
 	}
