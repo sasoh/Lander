@@ -17,6 +17,11 @@ public class TutorialHandlerScript : MonoBehaviour
 	private GameObject playerObject;
 	private GameObject cargoObject;
 
+	private bool shouldAutoHide = false;
+	public float autoHideTimeout = 2.0f;
+	private float autoHideTime = 0.0f;
+	private GameObject autoHideGameObject = null;
+
 	// Use this for initialization
 	void Start()
 	{
@@ -31,6 +36,25 @@ public class TutorialHandlerScript : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+
+		if (shouldAutoHide == true)
+		{
+			autoHideTime -= Time.deltaTime;
+
+			if (autoHideTime <= 0.0f)
+			{
+				if (autoHideGameObject == playerObject && playerObject != null)
+				{
+					PlayerTutorialControllerScript playerScript = playerObject.GetComponent<PlayerTutorialControllerScript>();
+					playerScript.HideSteps();
+				}	
+				else if (autoHideGameObject == cargoObject && cargoObject != null)
+				{
+					CargoTutorialControllerScript cargoScript = cargoObject.GetComponent<CargoTutorialControllerScript>();
+					cargoScript.HideSteps();
+				}
+			}
+		}
 
 	}
 
@@ -63,6 +87,11 @@ public class TutorialHandlerScript : MonoBehaviour
 			{
 				cargoScript.HideSteps();
 				playerScript.ShowStep(step);
+
+				// last step will disappear after a certain period of time
+				shouldAutoHide = true;
+				autoHideTime = autoHideTimeout;
+				autoHideGameObject = playerObject;
 			}
 		}
 

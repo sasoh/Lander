@@ -190,6 +190,8 @@ public class PlayerController : MonoBehaviour
 				Instantiate(explosionPrefab, transform.position, transform.rotation);
 			}
 
+			DropCargo();
+
 			// kill self
 			gameObject.SetActive(false);
 		}
