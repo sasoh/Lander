@@ -91,14 +91,7 @@ public class PlayerController : MonoBehaviour
 				}
 			}
 		}
-		else
-		{
-			// restart
-			if (Input.GetButton("Submit") == true)
-			{
-				Application.LoadLevel(Application.loadedLevel);
-			}
-		}
+
 	}
 
 	void UpdateMovement()

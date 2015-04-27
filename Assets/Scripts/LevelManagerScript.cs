@@ -4,6 +4,7 @@ using System.Collections;
 public class LevelManagerScript : MonoBehaviour
 {
 
+	public PlayerController playerObject = null;
 	private bool victory = false;
 
 	// Use this for initialization
@@ -11,6 +12,11 @@ public class LevelManagerScript : MonoBehaviour
 	{
 
 		victory = false;
+
+		if (playerObject == null)
+		{
+			print("Player object not set in level manager script, restarting the level would not work.");
+		}
 
 	}
 
@@ -23,6 +29,14 @@ public class LevelManagerScript : MonoBehaviour
 			victory = true;
 
 			print("Player won!");
+		}
+
+		if (playerObject != null && playerObject.isActiveAndEnabled == false)
+		{
+			if (Input.GetButton("Submit") == true)
+			{
+				Application.LoadLevel(Application.loadedLevel);
+			}
 		}
 
 	}

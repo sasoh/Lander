@@ -68,6 +68,7 @@
      <Compile Include="Assets\Scripts\Scene scripts\MissionBriefingSceneButtonScript.cs" />
      <Compile Include="Assets\Scripts\Scene scripts\OptionsSceneScript.cs" />
      <Compile Include="Assets\Scripts\Scene scripts\SplashSceneMenuScript.cs" />
+     <Compile Include="Assets\Scripts\WallBlockScript.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

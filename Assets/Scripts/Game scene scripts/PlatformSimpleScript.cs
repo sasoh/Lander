@@ -6,6 +6,8 @@ public class PlatformSimpleScript : MonoBehaviour
 
 	public GameObject flagSprite;
 
+	private float counter = 0;
+
 	public enum PlatformType
 	{
 
@@ -24,11 +26,21 @@ public class PlatformSimpleScript : MonoBehaviour
 
 		SetFlagSprite();
 
+		counter += Random.Range(-0.5f, 0.5f);
+
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
+
+		// add some bobbing motion
+		counter += Time.deltaTime / 5.0f;
+		float y = Mathf.Sin(counter * Mathf.PI) * 0.005f;
+
+		Vector3 localPos = transform.localPosition;
+		localPos.y += y;
+		transform.localPosition = localPos;
 
 	}
 
