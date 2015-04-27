@@ -25,7 +25,7 @@ public class CharacterCreationSceneButtonsScript : MonoBehaviour
 	public void DidPressPlayButton()
 	{
 
-		Application.LoadLevel("MissionBriefingScene");
+		Application.LoadLevel("MissionScene");
 
 	}
 

@@ -60,6 +60,8 @@
      <Compile Include="Assets\Scripts\Game scene scripts\TutorialHandlerScript.cs" />
      <Compile Include="Assets\Scripts\GeneralControlsController.cs" />
      <Compile Include="Assets\Scripts\LevelManagerScript.cs" />
+     <Compile Include="Assets\Scripts\PlayerSkinScript.cs" />
+     <Compile Include="Assets\Scripts\PrevNextScript.cs" />
      <Compile Include="Assets\Scripts\Scene scripts\CharacterCreationSceneButtonsScript.cs" />
      <Compile Include="Assets\Scripts\Scene scripts\CreditsSceneScript.cs" />
      <Compile Include="Assets\Scripts\Scene scripts\MainMenuSceneButtonsScript.cs" />
