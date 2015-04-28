@@ -35,12 +35,16 @@ public class PlatformSimpleScript : MonoBehaviour
 	{
 
 		// add some bobbing motion
-		counter += Time.deltaTime / 5.0f;
-		float y = Mathf.Sin(counter * Mathf.PI) * 0.005f;
+		float deltaTime = Time.deltaTime;
+		if (deltaTime > 0.001f)
+		{
+			counter += deltaTime / 5.0f;
+			float y = Mathf.Sin(counter * Mathf.PI) * 0.005f;
 
-		Vector3 localPos = transform.localPosition;
-		localPos.y += y;
-		transform.localPosition = localPos;
+			Vector3 localPos = transform.localPosition;
+			localPos.y += y;
+			transform.localPosition = localPos;
+		}
 
 	}
 
