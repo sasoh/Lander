@@ -8,6 +8,8 @@ public class PlayerSkinScript : MonoBehaviour
 	public GameObject body = null;
 	public GameObject body1prefab = null;
 	public GameObject body2prefab = null;
+	public GameObject body3prefab = null;
+	public GameObject body4prefab = null;
 
 	// Use this for initialization
 	void Start()
@@ -64,13 +66,22 @@ public class PlayerSkinScript : MonoBehaviour
 			index = PlayerPrefs.GetInt("BodyNumber");
 		}
 
+		// disgusting 
 		if (index == 0)
 		{
 			result = Instantiate(body1prefab);
 		}
-		else
+		else if (index == 1)
 		{
 			result = Instantiate(body2prefab);
+		}
+		else if (index == 2)
+		{
+			result = Instantiate(body3prefab);
+		}
+		else if (index == 3)
+		{
+			result = Instantiate(body4prefab);
 		}
 
 		return result;
