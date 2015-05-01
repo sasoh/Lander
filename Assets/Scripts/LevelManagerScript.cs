@@ -14,6 +14,7 @@ public class LevelManagerScript : MonoBehaviour
 	private float currentTimeLeft = 0.0f;
 	private int lastTime = 0;
 	private bool endGame = false;
+	private string nextMissionName = "MissionScene1";
 
 	// Use this for initialization
 	void Start()
@@ -55,6 +56,8 @@ public class LevelManagerScript : MonoBehaviour
 	void Update()
 	{
 
+		string mission2name = "MissionScene2";
+
 		if (endGame == false)
 		{
 			if (HasCargoBoxesOnScene() == false && victory == false)
@@ -62,7 +65,18 @@ public class LevelManagerScript : MonoBehaviour
 				victory = true;
 				endGame = true;
 
-				string message = "Player won!\nPress Enter/Space to restart.";
+				string message;
+
+				if (Application.loadedLevelName != mission2name)
+				{
+					message = "Great job!\nPress Enter/Space to begin next mission.";
+					nextMissionName = "MissionScene2";
+				}
+				else
+				{
+					message = "All levels completed.\nPress Enter/Space to restart from level 1.";
+					nextMissionName = "MissionScene1";
+				}
 				ShowEndGameLabelWithText(message);
 			}
 
@@ -77,16 +91,23 @@ public class LevelManagerScript : MonoBehaviour
 		}
 		else
 		{
-			if (playerObject != null && playerObject.isActiveAndEnabled == false)
+			if (victory == false)
 			{
-				string message = "Mission failed, player died.\nPress Enter/Space to restart.";
-				ShowEndGameLabelWithText(message);
+				if (playerObject != null && playerObject.isActiveAndEnabled == false)
+				{
+					string message = "Mission failed, player died.\nPress Enter/Space to restart.";
+					ShowEndGameLabelWithText(message);
+				}
 			}
 		}
 
-		if (victory == true || endGame == true)
+		if (Input.GetButton("Submit") == true)
 		{
-			if (Input.GetButton("Submit") == true)
+			if (victory == true)
+			{
+				Application.LoadLevel(nextMissionName);
+			}
+			else if (endGame == true)
 			{
 				Application.LoadLevel(Application.loadedLevel);
 			}

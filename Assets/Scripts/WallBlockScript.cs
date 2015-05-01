@@ -18,7 +18,7 @@ public class WallBlockScript : MonoBehaviour
 			directionCW = true;
 		}
 
-		multiplier = Random.Range(3.0f, 20.0f);
+		//multiplier = Random.Range(3.0f, 20.0f);
 
 	}
 
@@ -35,7 +35,7 @@ public class WallBlockScript : MonoBehaviour
 		// add slow rotating motion
 		Vector3 currentRotation = transform.localRotation.eulerAngles;
 		currentRotation.z += Time.deltaTime * direction * multiplier;
-		transform.rotation = Quaternion.Euler(currentRotation);
+		transform.localRotation = Quaternion.Euler(currentRotation);
 
 	}
 }

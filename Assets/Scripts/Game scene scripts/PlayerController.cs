@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour
 
 			if (tutorialController != null)
 			{
-				if (Input.anyKeyDown == true)
+				if (Vector3.Magnitude(GetComponent<Rigidbody2D>().velocity) > 10.0f)
 				{
 					if (tutorialController.lastStep == TutorialHandlerScript.TutorialStep.StepPlayerControls)
 					{
