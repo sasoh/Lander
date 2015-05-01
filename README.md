@@ -1,6 +1,10 @@
 Lander
 ===
 
+[Latest build here](https://sourceforge.net/projects/lander-april/files/latest/download?source=files)
+
+[@sourceforge](https://sourceforge.net/projects/lander-april/files/builds/)
+
 Summary
 ===
 The player takes control of a vehicle and transports stuff from one place to another. Main level design features will be centered around mofications around the vehicle control physics (waves of force/air/gravity, etc). Finishing missions unlocks upgrades to the vessel that are needed for later missions (space travel, etc). The goal of the game is to complete all levels (at least for now).
@@ -22,8 +26,8 @@ Prealpha
 - [x] tips
 
 Alpha
-- [ ] additional graphcis for player creation, levels
-- [ ] several levels
+- [x] additional graphcis for player creation, levels
+- [x] several levels
 - [ ] gravity modifiers - forces, effectors, etc
 - [ ] saving game (player, level reached, etc)
 - TBC
