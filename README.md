@@ -31,7 +31,7 @@ Alpha - until end of month
 - [x] level progress of some sort
 
 Beta
-- [ ] release completed 'alpha' version & get feedback
+- [ ] show around 'alpha' version & receive feedback
 
 Final 
 - ???
