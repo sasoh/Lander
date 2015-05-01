@@ -7,7 +7,7 @@ Lander
 
 Summary
 ===
-The player takes control of a vehicle and transports stuff from one place to another. Main level design features will be centered around mofications around the vehicle control physics (waves of force/air/gravity, etc). Finishing missions unlocks upgrades to the vessel that are needed for later missions (space travel, etc). The goal of the game is to complete all levels (at least for now).
+The player takes control of a vehicle and transports stuff from one place to another. Main level design features will be centered around the vehicle control physics. The goal of the game is to complete all levels (at least for now). 
 
 Arcade game motivited by [onegameamonth.com](onegameamonth.com). Similar gameplay mechanics to [ugh](http://en.wikipedia.org/wiki/Ugh!) from the early 90s. 
 
@@ -28,6 +28,7 @@ Alpha - until end of month
 - [x] additional graphcis for player creation, levels
 - [x] more than 1 level
 - [x] player customization
+- [x] death after 3 hits with high speed 
 
 Beta
 - [ ] release completed 'alpha' version & get feedback
