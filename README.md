@@ -1,5 +1,6 @@
 Lander
 ===
+Current stage: **Alpha**
 
 [Latest build here](https://sourceforge.net/projects/lander-april/files/latest/download?source=files)
 
