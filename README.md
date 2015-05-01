@@ -15,30 +15,26 @@ Roadmap
 ========
 
 
-Prealpha
+Prealpha - first 2 weeks
 - [x] base menu flow
 - main screen
 - character creation
 - mission select
 - [x] ugh-style lander control
-- [x] 1-2 playable levels with difficulty difference
-- [x] earth-like gravity
-- [x] tips
+- [x] playable level
+- [x] tutorial messages
 
-Alpha
+Alpha - until end of month
 - [x] additional graphcis for player creation, levels
-- [x] several levels
-- [ ] gravity modifiers - forces, effectors, etc
-- [ ] saving game (player, level reached, etc)
-- TBC
+- [x] more than 1 level
+- [x] player customization
 
 Beta
-- ???
+- [ ] release completed 'alpha' version & get feedback
 
 Final 
 - ???
 
 Review
-- define overall future
+- define future goals
 - discuss game quality
-- discuss sales feasibility
