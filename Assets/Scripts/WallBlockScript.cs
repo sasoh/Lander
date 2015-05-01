@@ -18,8 +18,12 @@ public class WallBlockScript : MonoBehaviour
 			directionCW = true;
 		}
 
-		//multiplier = Random.Range(3.0f, 20.0f);
+		multiplier = Random.Range(3.0f, 20.0f);
 
+		// random startup rotation
+		Vector3 currentRotation = transform.localRotation.eulerAngles;
+		currentRotation.z += Random.Range(0.0f, 360.0f);
+		transform.localRotation = Quaternion.Euler(currentRotation);
 	}
 
 	// Update is called once per frame

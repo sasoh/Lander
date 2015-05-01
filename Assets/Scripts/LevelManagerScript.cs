@@ -14,7 +14,7 @@ public class LevelManagerScript : MonoBehaviour
 	private float currentTimeLeft = 0.0f;
 	private int lastTime = 0;
 	private bool endGame = false;
-	private string nextMissionName = "MissionScene1";
+	private string nextMissionName = "";
 
 	// Use this for initialization
 	void Start()
@@ -56,8 +56,6 @@ public class LevelManagerScript : MonoBehaviour
 	void Update()
 	{
 
-		string mission2name = "MissionScene2";
-
 		if (endGame == false)
 		{
 			if (HasCargoBoxesOnScene() == false && victory == false)
@@ -65,19 +63,7 @@ public class LevelManagerScript : MonoBehaviour
 				victory = true;
 				endGame = true;
 
-				string message;
-
-				if (Application.loadedLevelName != mission2name)
-				{
-					message = "Great job!\nPress Enter/Space to begin next mission.";
-					nextMissionName = "MissionScene2";
-				}
-				else
-				{
-					message = "All levels completed.\nPress Enter/Space to restart from level 1.";
-					nextMissionName = "MissionScene1";
-				}
-				ShowEndGameLabelWithText(message);
+				ShowVictoryMessage();
 			}
 
 			// player death restart
@@ -93,11 +79,7 @@ public class LevelManagerScript : MonoBehaviour
 		{
 			if (victory == false)
 			{
-				if (playerObject != null && playerObject.isActiveAndEnabled == false)
-				{
-					string message = "Mission failed, player died.\nPress Enter/Space to restart.";
-					ShowEndGameLabelWithText(message);
-				}
+				ShowFailureMessage();
 			}
 		}
 
@@ -105,13 +87,54 @@ public class LevelManagerScript : MonoBehaviour
 		{
 			if (victory == true)
 			{
-				Application.LoadLevel(nextMissionName);
+				if (nextMissionName.Length > 0)
+				{
+					Application.LoadLevel(nextMissionName);
+				}
+				else
+				{
+					print("Invalid next mission name.");
+				}
 			}
 			else if (endGame == true)
 			{
 				Application.LoadLevel(Application.loadedLevel);
 			}
 		}
+
+	}
+
+	void ShowFailureMessage()
+	{
+
+		if (playerObject != null && playerObject.isActiveAndEnabled == false)
+		{
+			string message = "Mission failed, player died.\nPress Enter/Space to restart.";
+			ShowEndGameLabelWithText(message);
+		}
+
+	}
+
+	void ShowVictoryMessage()
+	{
+
+		string message;
+
+		string currentMissionName = Application.loadedLevelName;
+		string currentMissionNumberString = currentMissionName.Substring(currentMissionName.Length - 1);
+		int currentMissionNumber = int.Parse(currentMissionNumberString);
+
+		if (currentMissionNumber < 3)
+		{
+			message = "Great job!\nPress Enter/Space to begin next mission.";
+			nextMissionName = "MissionScene" + (currentMissionNumber + 1);
+		}
+		else
+		{
+			message = "All levels completed.\nPress Enter/Space to restart from level 1.";
+			nextMissionName = "MissionScene1";
+		}
+		ShowEndGameLabelWithText(message);
 
 	}
 
