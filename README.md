@@ -19,16 +19,16 @@ Prealpha - first 2 weeks
 - [x] base menu flow
 - main screen
 - character creation
-- mission select
 - [x] ugh-style lander control
 - [x] playable level
 - [x] tutorial messages
 
 Alpha - until end of month
 - [x] additional graphcis for player creation, levels
-- [x] more than 1 level
 - [x] player customization
 - [x] death after 3 hits with high speed 
+- [x] timed missions
+- [x] level progress of some sort
 
 Beta
 - [ ] release completed 'alpha' version & get feedback
