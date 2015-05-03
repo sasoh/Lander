@@ -6,6 +6,8 @@ Current stage: **Alpha**
 
 [@sourceforge](https://sourceforge.net/projects/lander-april/files/builds/)
 
+![](http://i.imgur.com/k02S28H.jpg)
+
 Summary
 ===
 The player takes control of a vehicle and transports stuff from one place to another. Main level design features will be centered around the vehicle control physics. The goal of the game is to complete all levels (at least for now). 
