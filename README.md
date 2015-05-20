@@ -2,7 +2,7 @@ Lander
 ===
 Current stage: **Alpha**
 
-[Latest build here](https://sourceforge.net/projects/lander-april/files/latest/download?source=files)
+[Latest build here](http://sourceforge.net/projects/lander-april/files/builds/18_MoreLevels.rar/download)
 
 [@sourceforge](https://sourceforge.net/projects/lander-april/files/builds/)
 
